@@ -1,6 +1,9 @@
-# MyFirstApp
+# DarkWeather
+Deployed on http://csci571hw8-env.mnngic9n8v.us-east-2.elasticbeanstalk.com/
 
+A web Search Web buit on Angular, BootStrap , DarkSky API and Node.js
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.15.
+
 
 ## Development server
 
