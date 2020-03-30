@@ -1,0 +1,47 @@
+<ng-template  #content let-modal >
+        <div class="modal-header" style="background-color:  #5B87A5; border-color: #5B87A5;">
+          <h4 class="modal-title" id="modal-basic-title">{{getDate(newWeather['currently']['time'])}}</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row px-4">
+                <div class="col-7">
+                    <p class="h3">{{cityName}}</p>
+                    <p class="h2">{{newWeather['currently']['temperature'] | number:'2.0-0'}}&deg; F</p>
+                    <p class='h5'>{{newWeather['currently']['summary']}}</p>
+                </div>
+                <div class="col">
+                    <img class = "img-fluid w-75 mt-2"src="{{get_icon(newWeather['currently']['icon'])}}" alt="{{newWeather['currently']['icon']}}">
+                </div>
+            </div>
+            <hr>
+            <div class="row justify-content-end" >
+                <div class="col-6">
+                    <p class="my-1">Precipitation: {{(newWeather['currently']['precipIntensity'] | number:'1.0-2')}}</p>
+                    <p class="my-1">Chance of Rain: {{newWeather['currently']['precipProbability'] * 100 | number:'1.0-2'}} %</p>
+                    <p class="my-1">Wind Speed: {{(newWeather['currently']['windSpeed'] | number:'1.0-2' )}} mph</p>
+                    <p class="my-1">Humidity: {{newWeather['currently']['humidity'] * 100 | number:'1.0-2'}} %</p>
+                    <p class="my-1">Visibility: {{newWeather['currently']['visibility'] | number:'1.0-2'}} miles</p>
+                </div>
+            </div>
+        </div>
+</ng-template>
+<div>
+    <div class="d-flex justify-content-center mt-2 alert alert-light">
+        <em>(click bars for detail info)</em>   
+    </div>
+    <div style="display: block">
+        <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                [plugins]="barChartPlugins"
+                (chartClick)="chartClicked($event, content)"
+        >
+        </canvas>
+    </div>
+</div>

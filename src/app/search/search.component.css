@@ -1,0 +1,9 @@
+
+ :host ::ng-deep  a.nav-link {
+    color: #6c757d;
+  }
+  
+  :host ::ng-deep  .nav-link.active {
+    color: white;
+    background: #397399d4; 
+  }

@@ -1,0 +1,21 @@
+<ng-template #NoRecords><div  class="alert alert-warning mt-3" role="alert">No Records</div></ng-template>
+<table class="table my-5 text-center" *ngIf="listItems.length != 0; else NoRecords">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Favorites</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let item of listItems; let i = index"> 
+        <th class="align-middle"scope="row" style="width:10%;">{{i + 1}}</th>
+        <td class="align-middle"style="width: 25%;"><img class="img-fluid imgSize" src="{{item[2]}}" alt="{{item[1]}}"></td>
+        <td class="align-middle"style="width: 25%;"><a href="#" class="text-primary font-weight-bold " (click)='handleSearch(i)'>{{item[0]}}</a></td>
+        <td class="align-middle"style="width: 25%;">{{item[1]}}</td>
+        <td class="align-middle"style="width: 15%;"><button class="btn btn-light" (click) = 'handleDelete(i)'><i class="material-icons align-center" style="color: gold; ">delete</i></button>
+      </tr>
+    </tbody>
+  </table>

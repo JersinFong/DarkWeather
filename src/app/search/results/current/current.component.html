@@ -1,0 +1,41 @@
+<div class="row justify-content-center mb-5 mx-1">
+    <div class="col-md-7 mt-3 border border-secondary rounded  px-4" style="background: #7dc9f4e6;">
+        <div class="row my-4">
+            <div class="col-7">
+                <p class="h2">{{cityName}}</p>
+                <p class="h4 text-secondary">{{weatherInfo['timezone']}}</p>
+                <p class="h1 my-4">{{weatherInfo['currently']['temperature'] | number:'2.0-0'}} &deg; F</p>
+                <p class="h3">{{weatherInfo['currently']['summary']}}</p>
+            </div>
+            <div class="col-5 ">
+                    <img class="img-fluid w-auto" src="{{stateImgURL}}" alt="{{stateName}}">
+            </div>
+        </div>
+        <div class="row  text-center para">
+            <div class="col">
+                <img class="img-fluid"src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-16-512.png" placement="top" ngbTooltip="Humidity">
+                <p>{{weatherInfo['currently']['humidity']}}</p>
+            </div>
+            <div class="col">
+                <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-25-512.png" placement="top" ngbTooltip="Pressure">
+                <p>{{weatherInfo['currently']['pressure']}}</p>
+            </div>
+            <div  class="col">
+                <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-27-512.png" placement="top" ngbTooltip="WindSpeed">
+                <p>{{weatherInfo['currently']['windSpeed']}}</p>
+            </div>
+            <div class="col">
+                <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-30-512.png"placement="top" ngbTooltip="Visibility">
+                <p>{{weatherInfo['currently']['visibility']}}</p>
+            </div>
+            <div class="col">
+                <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-28-512.png" placement="top" ngbTooltip="CloudCover">
+                <p>{{weatherInfo['currently']['cloudCover']}}</p>
+            </div>
+            <div class="col">
+                <img class="img-fluid" src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-24-512.png" placement="top" ngbTooltip="Ozone">
+                <p>{{weatherInfo['currently']['ozone']}}</p>
+            </div>
+        </div>
+    </div>
+</div>

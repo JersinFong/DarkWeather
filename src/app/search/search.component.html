@@ -1,0 +1,111 @@
+<div class="row justify-content-center mb-4">
+    <div class="col-lg-9 mt-3">
+        <div class="border border-secondary rounded p-lg-5 p-3 text-white shadow-lg" style="background: #397399d4;">
+            <form  autocomplete="off" class="mx-lg-5 mx-3" (ngSubmit)="onSubmit(f, t)" #f = "ngForm" >
+                <p class="h1 text-center mb-4">Weather search</p>
+                <div class="form-group row">
+                    <label for="street" class="col-md-2 col-form-label">Street <span class="text-danger">*</span></label>
+                    <div class="col-md-8">
+                        <input 
+                            id="street" 
+                            name = "street" 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Enter Street Name" 
+                            required 
+                            [disabled] = "!allowInput" 
+                            ngModel
+                            #street='ngModel'
+                        >
+                        <p class="text-danger mb-0" *ngIf="!street.valid && street.touched && allowInput">Please enter a street</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="city" class="col-md-2 col-form-label">City <span class="text-danger">*</span></label>
+                    <div class="col-md-8">
+                        <input 
+                            id="city" 
+                            name = "city" 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Enter City Name" 
+                            required 
+                            [disabled] = "!allowInput"  
+                            [(ngModel)] = 'cityInput'
+                            [ngbTypeahead]= "search"
+                            (input) = "hadnleOninput()"
+                            #city = 'ngModel'
+                        >
+                        <p class="text-danger mb-0" *ngIf="!city.valid && city.touched && allowInput">Please enter a city</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="state" class="col-md-2 col-form-label">State <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                        <select 
+                            id="state" 
+                            name = "state" 
+                            type="text" 
+                            class="form-control"  
+                            [disabled] = "!allowInput"
+                            [(ngModel)] = "defaultOption"
+                        > 
+                            <option value="default">Select State</option>
+                            <option *ngFor = "let state of statesJson" value="{{state.Abbreviation}}">{{state.State}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input 
+                            id="currentLoc" 
+                            name="currentLoc"
+                            type="checkbox" 
+                            class="form-check-input" 
+                            (click)="handleCheck($event)"
+                            ngModel
+                            #currentLoc = 'ngModel'
+                        >
+                        <label for="currentLoc"class="form-check-lable">Current location</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button 
+                        type="submit" 
+                        class="btn btn-light ml-3 text-secondary" 
+                        [disabled] = "((!f.valid || defaultOption === 'default' || defaultOption === null) && (allowInput))"
+                    >
+                        <i class="material-icons align-bottom" >search</i>Search
+                    </button>
+                    <button 
+                        type="reset" 
+                        class="btn btn-light ml-3 text-secondary"
+                        (click) = "handleClear(t)"
+                    >
+                        <i class="material-icons align-bottom">clear_all</i>Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- tab -->
+<!-- <div class="row justify-content-center mt-4"> -->
+<div class="my-4">
+    <ngb-tabset type="pills"  justify="center"  #t="ngbTabset" (click)="onFav($event)">
+            <ngb-tab title="Results" id="results">
+                <ng-template ngbTabContent>
+                    <p *ngIf='progress' class="mt-4"><ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true"></ngb-progressbar></p>
+                    <div *ngIf='error' class="alert alert-warning mt-3" role="alert">Invalid Address</div>
+                    <app-results *ngIf='showResult && !showFavResult && !error' [weatherInfo] = "weatherInfo" [cityName] = "cityName" [stateName] = 'stateName'></app-results>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Favorite" id="favorite">
+                <ng-template ngbTabContent>
+                    <p *ngIf='progress' class="mt-4"><ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true"></ngb-progressbar></p>
+                    <app-favorite *ngIf='!showFavResult && showFav' [listItems] = 'listItems' (favSearched) = 'onFavSearch($event)'></app-favorite>
+                    <app-results *ngIf='showFavResult' [weatherInfo] = "weatherInfo" [cityName] = "cityName" [stateName] = 'stateName'></app-results>
+                </ng-template>
+            </ngb-tab>
+    </ngb-tabset>
+</div>

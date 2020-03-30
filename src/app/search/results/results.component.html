@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-sm-11 mt-5">
+        <div class="nav nav-tabs justify-content-between">
+            <ul class="nav" id="myTab" role="tablist">
+                    <li class="nav-item">
+                    <a class="nav-link active" id="current-tab" data-toggle="tab" href="#current" role="tab" aria-controls="current" aria-selected="true">Current</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link " id="hourly-tab" data-toggle="tab" href="#hourly" role="tab" aria-controls="hourly" aria-selected="false">Hourly</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link " id="weekly-tab" data-toggle="tab" href="#weekly" role="tab" aria-controls="weekly" aria-selected="false">weekly</a>
+                    </li>
+            </ul>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="twitter-share-button nav-link" href="https://twitter.com/intent/tweet?text=The current temperature at +{{cityName}}+ is {{weatherInfo['currently']['temperature']}}. The weather conditions are {{weatherInfo['currently']['summary']}}.&hashtags=CSCI571WeatherSearch">
+                        <div style="width: 42px; height: 24px;">
+                            <img src="https://images.techhive.com/images/article/2016/02/twitter-icon-logo-100644740-large.jpg" alt="..." class="img-fluid">
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-light " (click)="handleFav()"><i class="material-icons align-center" [ngStyle] = "{'color': favActive ? 'gold' : 'black'}">{{favActive ? 'star' : 'star_border' }}</i></button>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="current" role="tabpanel" aria-labelledby="current-tab">
+                <app-current [weatherInfo] = "weatherInfo" [cityName] = "cityName" [stateName] = 'stateName' (stateImgCreated) = 'storeURL($event)'></app-current>
+            </div>
+            <div class="tab-pane fade" id="hourly" role="tabpanel" aria-labelledby="hourly-tab">
+                <app-hourly [hourly] = "weatherInfo['hourly']"></app-hourly>
+            </div>
+            <div class="tab-pane fade" id="weekly" role="tabpanel" aria-labelledby="weekly-tab" >
+                <app-weekly [weatherInfo] = "weatherInfo" [cityName] = "cityName"></app-weekly>
+            </div>
+        </div>
+    </div>
+</div>

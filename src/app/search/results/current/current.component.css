@@ -1,0 +1,30 @@
+.para p{
+  font-size: 10px;
+}
+.para img{
+  width: 75%;
+}
+@media (min-width: 414px) {
+    .para p{
+        font-size: 12px;
+      }
+
+}
+@media (min-width: 768px) {
+    .para p{
+        font-size: 14px;
+      }
+    .para img{
+        width: 50%;
+    }
+
+}
+@media (min-width: 992px) {
+    .para p{
+        font-size: 16px;
+      }
+      .para img{
+        width: 50%;
+      }
+
+}

@@ -1,0 +1,12 @@
+a{
+    color:black;
+}
+
+:host ::ng-deep  a.nav-link {
+    color: black;
+  }
+  
+  :host ::ng-deep  .nav-link.active {
+    background: white; 
+    color: gray;
+  }
